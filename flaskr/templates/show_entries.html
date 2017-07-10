@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block body %}
+  {% if session.logged_in  %}
+    <form class=add-entry action="{{ url_for('add_entry') }}" method="post">
+      <dl class="">
+        <dt>Title:
+        <dd><input type="text" name="title" size="30">
+        <dt>Text:
+        <dd><textarea name=text rows="8" cols="72"></textarea>
+        <dd><input type="submit" name="" value=Share>
+      </dl>
+    </form>
+  {% endif %}
+  <ul class="entries">
+  {% for entry in entries %}
+    <li><h2>{{ entry.title }}</h2><p>{{ entry.text|safe }}</p>
+  {% else %}
+    <li><em>Unblievable. No entries here so far</em></li>
+  {% endfor %}
+  </ul>
+{% endblock %}
